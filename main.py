@@ -8,8 +8,8 @@ warnings.filterwarnings('ignore')
 
 # Импорт твоих мозгов проекта
 try:
-    from src.data_manager import DataManager
-    from src.trading_model import TradingModel
+    from data_manager import DataManager
+from trading_model import TradingModel
 except ImportError:
     print("Ошибка: папка 'src' должна быть рядом с этим файлом!")
 
