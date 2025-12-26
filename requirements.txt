@@ -1,0 +1,5 @@
+pyTelegramBotAPI
+pandas
+numpy
+requests
+flask
