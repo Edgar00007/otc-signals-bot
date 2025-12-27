@@ -5,14 +5,14 @@ import requests
 import warnings
 warnings.filterwarnings('ignore')
 
-# ТВОИ НАСТРОЙКИ
+# ТВОИ НАСТРОЙКИ (ВШИТЫ ВНУТРЬ ДЛЯ НАДЕЖНОСТИ)
 class LocalConfig:
     TELEGRAM_BOT_TOKEN = '8569495893:AAHKLwB94XMXFCAGAqDxSYTKp4XyEp0GZQs'
     TELEGRAM_CHANNEL_ID = '@Otcsignals12345'
     ASSETS = ["EUR/USD (OTC)", "GBP/USD (OTC)", "BTC/USD", "USD/JPY (OTC)"]
     WARMUP_PERIOD = 3 
 
-# ИСПРАВЛЕННЫЕ ИМПОРТЫ (БЕЗ SRC И НА АНГЛИЙСКОМ)
+# ИМПОРТЫ БЕЗ ПАПКИ SRC
 from data_manager import DataManager
 from trading_model import TradingModel
 
@@ -25,7 +25,6 @@ def send_telegram(text):
         print(f"Ошибка связи: {e}")
 
 def run_bot():
-    # Создаем объекты напрямую из импортированных классов
     data_manager = DataManager()
     model = TradingModel()
     
@@ -36,11 +35,9 @@ def run_bot():
         try:
             asset = np.random.choice(LocalConfig.ASSETS)
             tick_data = {'price': np.random.uniform(1.0, 1.1), 'asset': asset}
-            
-            # Добавляем данные
             features = data_manager.add_tick(tick_data)
             
-            # Проверка готовности данных (используем длину списка ticks)
+            # Проверка готовности (ждем накопления тиков)
             if len(data_manager.ticks) > LocalConfig.WARMUP_PERIOD:
                 prediction = model.predict(features)
                 direction = "ВВЕРХ 🟢" if prediction > 0.5 else "ВНИЗ 🔴"
@@ -55,7 +52,7 @@ def run_bot():
                 print(f"✅ Сигнал отправлен")
                 time.sleep(30) 
             else:
-                print("⏳ Собираем данные...")
+                print("⏳ Сбор данных...")
                 time.sleep(2)
         except Exception as e:
             print(f"Ошибка в цикле: {e}")
