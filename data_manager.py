@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 from sklearn.preprocessing import StandardScaler
 import logging
-from config.settings import Config
+from settings import Config
 
 logger = logging.getLogger(__name__)
 
