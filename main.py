@@ -5,14 +5,14 @@ import requests
 import warnings
 warnings.filterwarnings('ignore')
 
-# ТВОИ НАСТРОЙКИ (ВШИТЫ ВНУТРЬ ДЛЯ НАДЕЖНОСТИ)
+# ТВОИ НАСТРОЙКИ
 class LocalConfig:
     TELEGRAM_BOT_TOKEN = '8569495893:AAHKLwB94XMXFCAGAqDxSYTKp4XyEp0GZQs'
     TELEGRAM_CHANNEL_ID = '@Otcsignals12345'
     ASSETS = ["EUR/USD (OTC)", "GBP/USD (OTC)", "BTC/USD", "USD/JPY (OTC)"]
     WARMUP_PERIOD = 3 
 
-# ИМПОРТЫ БЕЗ ПАПКИ SRC
+# ИМПОРТЫ БЕЗ SRC
 from data_manager import DataManager
 from trading_model import TradingModel
 
@@ -37,7 +37,6 @@ def run_bot():
             tick_data = {'price': np.random.uniform(1.0, 1.1), 'asset': asset}
             features = data_manager.add_tick(tick_data)
             
-            # Проверка готовности (ждем накопления тиков)
             if len(data_manager.ticks) > LocalConfig.WARMUP_PERIOD:
                 prediction = model.predict(features)
                 direction = "ВВЕРХ 🟢" if prediction > 0.5 else "ВНИЗ 🔴"
