@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 # НАСТРОЙКИ
 class LocalConfig:
     # СОВЕТ: Замените токен в BotFather, этот скомпрометирован!
-    TELEGRAM_BOT_TOKEN = '8569495893:AAHKLwB94XMXFCAGAqDxSYTKp4XyEp0GZQs'
-    TELEGRAM_CHANNEL_ID = '@Otcsignals12345'
+    TELEGRAM_BOT_TOKEN = '8569495893:AAHKLwB94XMXFCAGAqDxSYTKp4XyEp0'
+    TELEGRAM_CHANNEL_ID = '@Otcsignals'
     ASSETS = ["EUR/USD (OTC)", "GBP/USD (OTC)", "BTC/USD", "USD/JPY (OTC)"]
     WARMUP_PERIOD = 5 # Увеличим период прогрева для стабильности данных
 
